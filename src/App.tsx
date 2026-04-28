@@ -112,8 +112,8 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 left-0 w-full flex justify-between items-center px-6 md:px-12 h-20 z-50 transition-all duration-300 ${scrolled ? 'premium-blur border-b border-white/5 h-16' : 'bg-transparent'}`}>
-      <div className="text-2xl font-black tracking-tighter text-white">
-        Caio <span className="text-gold-gradient">Veículos</span>
+      <div className="flex items-center">
+        <img src="/LOGOSVG.svg" alt="Caio Veículos" className="h-8 md:h-10 w-auto" />
       </div>
 
       <div className="hidden md:flex items-center gap-8">
@@ -558,8 +558,8 @@ export default function App() {
           <footer className="bg-surface-container-lowest border-t border-white/5 py-12">
             <div className="container mx-auto px-6 md:px-12 max-w-7xl flex flex-col md:flex-row justify-between items-center gap-8">
               <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                <div className="text-2xl font-black text-white mb-2">
-                  Caio <span className="text-gold-gradient">Veículos</span>
+                <div className="mb-4">
+                  <img src="/LOGOSVG.svg" alt="Caio Veículos" className="h-8 md:h-10 w-auto" />
                 </div>
                 <p className="text-[10px] text-white/30 font-black uppercase tracking-[0.4em]">© 2024. Excelência Automotiva em Rio Claro.</p>
               </div>
