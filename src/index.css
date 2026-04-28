@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-gold: #C9960A;
+  --color-gold-bright: #E5B539;
+  --color-surface: #141313;
+  --color-surface-container: #1C1B1B;
+  --color-surface-container-high: #2B2A2A;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .bg-gold-gradient {
+    background: linear-gradient(135deg, #C9960A 0%, #E5B539 50%, #C9960A 100%);
+    background-size: 200% auto;
+    transition: background-position 0.3s ease;
+  }
+  
+  .bg-gold-gradient:hover {
+    background-position: right center;
+  }
+
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #C9960A 0%, #E5B539 50%, #C9960A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+
+  .premium-blur {
+    backdrop-filter: blur(20px);
+    background-color: rgba(10, 10, 10, 0.8);
+  }
+}
