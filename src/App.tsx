@@ -25,36 +25,8 @@ import {
   Facebook,
   ArrowRight
 } from 'lucide-react';
-import VehicleDetails from './VehicleDetails';
-
-// --- Data Types ---
-export interface Vehicle {
-  id: string;
-  name: string;
-  price: string;
-  km: string;
-  year: string;
-  image: string;
-  tag?: string;
-  brand: string;
-  fuel: string;
-  color?: string;
-  doors?: number;
-  transmission?: string;
-  images?: string[];
-  accessories?: string[];
-}
-
-// --- Images (reused across vehicles for demo) ---
-export const IMG = {
-  civic: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDEtzmXXraze316AsqPqtVi1E3aStuuf11If5CMbZdmT0sdMnuJz1jEaqRWC4CQ7C3re83nTh4d-FAJkh1xNy1kzwA5qrYqjzphd0fhrH_HViuqG62dBiHtei214lMnNQXghb5P3tFcFYc3Gggd03hJlh0sNmkRbd4UhNbOwIInSr0iXx_-VlwzN0Mr6rpTERsL-RvYL2H0Vc_s7mBPoTDW4auDFwIhNqbHyL0Hy3ldssoAy1q9dHxbVyuvfUw9QvJIRX0c6zBB_PE',
-  corolla: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBe4UK26uq4DIwokcetCo2YQEpRsfym8jK8WQ-kUqDbc3-gdPBrxq2djv9OVY1zricFqd5U2n3-e8jc5cMLNG6DbY-CbSEOAwOcmxhsR7EiJ79kvu64LmSaSDDAgsUa2NZ95QM5HtSkQ8sz1j7MXFi3KxX7mUTxbQ4S6I-a-8agNJuCKkcXWfxDL7-W5pg3lEFLgs3dJvp7xeqOsa9g58bmHrrBH4h7z0GsoeSCnWhtJBS2Gu3LbnXxw47rwbIh_BACc-suPNjSKh0',
-  jeep: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDSAQPpNpOaEOR7d7Xtqqklw-TRNBu8UvAf6kC4K6jC3Un7x8wiY9S6L3JvoCnFYB033VbCLd3vZq2OmJtZ8X4Rb3l13G75lkY2uqOIZ8JapMuXAFG_OggbRkvSQQdyB3g82SPdc6nDJ-I700B4Uzwwj33C8Wl1aZeVvd3I8bxKzLS3e82DYvN6lXHXwszmyyImalbHkS4a_tMlniYmc26KazmYQyLb4_QswXq4W6n5G1xgjOIO9zXH3uF_0RCOhbsHPN4lOxO3dp8',
-  ford: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB_Fk68jAISDqJCvd0tolKz8ENwJnu9FexvE5dJQ6-YdsvKY4UGh-3TrekjHgbfvZdp_hdq3hQJgIqwWZve6Lqbp8sqaIdREeTRsaJmA6Luy1gpx0e7CT-2mqR_urZV7BDfzQKMDUcut4IKVacn80iBORtjJX8kuOE--Ahh049KNNlhwyIvxlACWHBCj_Yr0gbOjvsvLdzKRS62DeyXSmtu34ubIwl7bw9ScfCOYdZ_kaUJCuYIxEnzWT3aibrqYbBwckKfMG27QHk',
-  bmw: 'https://lh3.googleusercontent.com/aida-public/AB6AXuANQpMeA20R1SzmJi0ULGxb-zMecNcColHzY96qid7lqN-QTh52zxWfGHWVK6pCSvwx4Vq5IvxUBboqI-A8MuqEnABtLdIjNj9M19djHpMv3UutuuxrH86l9peFHOLXjaWVZakYiJ69OUIihk5xowsmy3VTB4p9CzCEjT73M5O9ZQPyxz8E3jza8hwKzd6LJXBOQFcYTOLAvHc2Nq_4vn6AJxRSO9G_ZQq479UWJN9qoiEhAOCKtva0uV7BH07bK1P9PX3_TlF5GOs',
-  audi: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCyapxmqBFLnnL6HOoeNKl51tTyx1c_rs6I-d1TgxjKDqyqCDI5IrxlvYrgcj4W2YW0el9sBPFTSxjIvIOjhvcvTNMIemlCKOrY2wZvQuYllvmq_SkGmORXDP3qOWVr7qEbEIWcjv0JiXQGD04vdhpy0AT0ERScZauaH-FlcFRhXXou6WLGiwp8HHlUOktuhFsUYiiDIZRNOy1uUcReSm8HvNcI-BAfKIAyd92Kj3PNnnqPRjwI2Y_AzPjnhC3ecaWRdlKEQHIgRTI',
-  vw: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAh7-0FE68rvM_sNWme-f6RNYX0hydqSeibVST_SVDUlVefb8pK6_GFUDcN7_YpaPN5ReDfBwWDyiSWS6yvj5raaD58U8u1oUMvQO3BairwPnSacoOHdlaZaAYFHH-iR4dL2MvzlztYOZ8RrNZnVoe4J3H7LUef2Rmz1QdwZdrTjoWn8J_r0YqcNJAR2uyIOTZIiNYuyIxvkBX02Gj_ok1q0fyMD-p9yNmYn1yBFXHNe8QUNgNeD4YEc8yovfZayS9S-JLjes17vWY',
-};
+import VehicleDetails from './VehicleDetails.tsx';
+import { Vehicle, IMG } from './types.ts';
 
 // --- Featured (shown in "Destaques da Semana") ---
 const FEATURED_VEHICLES: Vehicle[] = [

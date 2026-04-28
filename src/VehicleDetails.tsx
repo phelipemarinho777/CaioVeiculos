@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowLeft,
@@ -15,7 +15,7 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
-import { Vehicle, IMG } from './App';
+import { Vehicle, IMG } from './types.ts';
 
 interface VehicleDetailsProps {
   vehicle: Vehicle;
