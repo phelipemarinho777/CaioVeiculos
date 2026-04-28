@@ -27,7 +27,7 @@ import {
 } from 'lucide-react';
 
 // --- Data Types ---
-interface Vehicle {
+export interface Vehicle {
   id: string;
   name: string;
   price: string;
@@ -37,10 +37,15 @@ interface Vehicle {
   tag?: string;
   brand: string;
   fuel: string;
+  color?: string;
+  doors?: number;
+  transmission?: string;
+  images?: string[];
+  accessories?: string[];
 }
 
 // --- Images (reused across vehicles for demo) ---
-const IMG = {
+export const IMG = {
   civic: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDEtzmXXraze316AsqPqtVi1E3aStuuf11If5CMbZdmT0sdMnuJz1jEaqRWC4CQ7C3re83nTh4d-FAJkh1xNy1kzwA5qrYqjzphd0fhrH_HViuqG62dBiHtei214lMnNQXghb5P3tFcFYc3Gggd03hJlh0sNmkRbd4UhNbOwIInSr0iXx_-VlwzN0Mr6rpTERsL-RvYL2H0Vc_s7mBPoTDW4auDFwIhNqbHyL0Hy3ldssoAy1q9dHxbVyuvfUw9QvJIRX0c6zBB_PE',
   corolla: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBe4UK26uq4DIwokcetCo2YQEpRsfym8jK8WQ-kUqDbc3-gdPBrxq2djv9OVY1zricFqd5U2n3-e8jc5cMLNG6DbY-CbSEOAwOcmxhsR7EiJ79kvu64LmSaSDDAgsUa2NZ95QM5HtSkQ8sz1j7MXFi3KxX7mUTxbQ4S6I-a-8agNJuCKkcXWfxDL7-W5pg3lEFLgs3dJvp7xeqOsa9g58bmHrrBH4h7z0GsoeSCnWhtJBS2Gu3LbnXxw47rwbIh_BACc-suPNjSKh0',
   jeep: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDSAQPpNpOaEOR7d7Xtqqklw-TRNBu8UvAf6kC4K6jC3Un7x8wiY9S6L3JvoCnFYB033VbCLd3vZq2OmJtZ8X4Rb3l13G75lkY2uqOIZ8JapMuXAFG_OggbRkvSQQdyB3g82SPdc6nDJ-I700B4Uzwwj33C8Wl1aZeVvd3I8bxKzLS3e82DYvN6lXHXwszmyyImalbHkS4a_tMlniYmc26KazmYQyLb4_QswXq4W6n5G1xgjOIO9zXH3uF_0RCOhbsHPN4lOxO3dp8',
@@ -85,14 +90,15 @@ const ITEMS_PER_PAGE = 6;
 
 // --- Components ---
 
-const VehicleCard: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => (
+const VehicleCard: React.FC<{ vehicle: Vehicle; onSelect: (v: Vehicle) => void }> = ({ vehicle, onSelect }) => (
   <motion.div
     layout
     initial={{ opacity: 0, y: 16 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.3 }}
-    className="bg-[#111111] rounded-xl overflow-hidden border border-white/5 hover:border-gold/20 transition-all duration-300 group"
+    onClick={() => onSelect(vehicle)}
+    className="bg-[#111111] rounded-xl overflow-hidden border border-white/5 hover:border-gold/40 hover:shadow-[0_0_15px_rgba(201,150,10,0.1)] transition-all duration-300 group cursor-pointer"
   >
     <div className="relative aspect-[4/3] overflow-hidden bg-[#1a1a1a]">
       <img
@@ -118,11 +124,7 @@ const VehicleCard: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => (
       <p className="text-white/40 text-xs mb-3">
         {vehicle.year}&nbsp;·&nbsp;{vehicle.km} km&nbsp;·&nbsp;{vehicle.fuel}
       </p>
-      <p className="text-gold font-black text-xl mb-4">R$ {vehicle.price}</p>
-      <button className="w-full bg-[#1a1a1a] border border-white/10 text-white/90 py-2.5 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 hover:border-[#25D366]/40 hover:text-white transition-all duration-200 group/btn">
-        <MessageCircle className="w-4 h-4 text-[#25D366] fill-[#25D366]/20" />
-        Tenho interesse
-      </button>
+      <p className="text-gold font-black text-xl">R$ {vehicle.price}</p>
     </div>
   </motion.div>
 );
@@ -168,12 +170,15 @@ const Navbar = () => {
   );
 };
 
+import VehicleDetails from './VehicleDetails';
+
 export default function App() {
   const [filterBrand, setFilterBrand] = useState('Todas');
   const [filterYear, setFilterYear] = useState('');
   const [filterPrice, setFilterPrice] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredInventory, setFilteredInventory] = useState(INVENTORY);
+  const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
 
   useEffect(() => {
     let result = INVENTORY;
@@ -196,7 +201,13 @@ export default function App() {
     <div className="bg-[#0a0a0a] text-on-surface font-sans overflow-x-hidden selection:bg-gold/30 selection:text-white">
       <Navbar />
 
-      {/* Hero Section */}
+      {selectedVehicle ? (
+        <div className="pt-20">
+          <VehicleDetails vehicle={selectedVehicle} onBack={() => setSelectedVehicle(null)} />
+        </div>
+      ) : (
+        <>
+          {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <motion.img
@@ -263,7 +274,7 @@ export default function App() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {FEATURED_VEHICLES.map((vehicle) => (
-              <VehicleCard key={vehicle.id} vehicle={vehicle} />
+              <VehicleCard key={vehicle.id} vehicle={vehicle} onSelect={setSelectedVehicle} />
             ))}
           </div>
         </div>
@@ -369,7 +380,7 @@ export default function App() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence mode="popLayout">
               {paginatedInventory.map(vehicle => (
-                <VehicleCard key={vehicle.id} vehicle={vehicle} />
+                <VehicleCard key={vehicle.id} vehicle={vehicle} onSelect={setSelectedVehicle} />
               ))}
             </AnimatePresence>
             {paginatedInventory.length === 0 && (
@@ -595,17 +606,20 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Floating WhatsApp */}
       <motion.a
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        href="#"
+        href="https://wa.me/5519999999999"
+        target="_blank"
+        rel="noreferrer"
         className="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-[0_10px_30px_rgba(37,211,102,0.4)] z-50 border border-white/20"
       >
         <MessageCircle className="w-8 h-8 fill-current" />
       </motion.a>
+        </>
+      )}
     </div>
   );
 }
