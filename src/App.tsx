@@ -83,8 +83,8 @@ const VehicleCard: React.FC<{ vehicle: Vehicle; onSelect: (v: Vehicle) => void }
       {vehicle.tag && (
         <div
           className={`absolute top-3 left-3 px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-wider ${vehicle.tag === 'NOVO'
-              ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-500/40'
-              : 'bg-amber-950/80 text-gold border border-gold/40'
+            ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-500/40'
+            : 'bg-amber-950/80 text-gold border border-gold/40'
             }`}
         >
           {vehicle.tag}
@@ -130,7 +130,7 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <button className="hidden lg:block bg-gold-gradient text-surface font-bold uppercase tracking-wider text-xs px-6 py-2.5 rounded-full hover:shadow-[0_0_20px_rgba(201,150,10,0.4)] transition-all active:scale-95">
+        <button className="hidden lg:block bg-gold-gradient text-surface font-bold uppercase tracking-wider text-xs px-6 py-2.5 rounded-[0.5rem] hover:shadow-[0_0_20px_rgba(201,150,10,0.4)] transition-all active:scale-95">
           Ver estoque
         </button>
         <button className="flex items-center gap-2 text-white/70 hover:text-gold transition-colors font-bold uppercase tracking-wider text-xs">
@@ -210,7 +210,7 @@ export default function App() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     href="#estoque"
-                    className="border-2 border-gold text-gold px-8 py-4 rounded-full font-bold text-center hover:bg-gold/10 transition-all flex items-center justify-center gap-2 group"
+                    className="border-2 border-gold text-gold px-8 py-4 rounded-[0.5rem] font-bold text-center hover:bg-gold/10 transition-all flex items-center justify-center gap-2 group"
                   >
                     Ver Estoque Completo <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </motion.a>
@@ -218,7 +218,7 @@ export default function App() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     href="https://wa.me/5519999999999"
-                    className="bg-gold text-surface px-8 py-4 rounded-full font-bold text-center hover:shadow-[0_0_25px_rgba(201,150,10,0.4)] transition-all flex items-center justify-center gap-2 group shadow-lg"
+                    className="bg-gold text-surface px-8 py-4 rounded-[0.5rem] font-bold text-center hover:shadow-[0_0_25px_rgba(201,150,10,0.4)] transition-all flex items-center justify-center gap-2 group shadow-lg"
                   >
                     Chamar No WhatsApp
                     <MessageCircle className="w-5 h-5 fill-current" />
@@ -336,8 +336,8 @@ export default function App() {
                     key={brand}
                     onClick={() => setFilterBrand(brand)}
                     className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 ${filterBrand === brand
-                        ? 'bg-gold text-[#0a0a0a]'
-                        : 'bg-transparent border border-white/15 text-white/60 hover:border-gold/40 hover:text-white/90'
+                      ? 'bg-gold text-[#0a0a0a]'
+                      : 'bg-transparent border border-white/15 text-white/60 hover:border-gold/40 hover:text-white/90'
                       }`}
                   >
                     {brand}
@@ -367,8 +367,8 @@ export default function App() {
                       key={page}
                       onClick={() => setCurrentPage(page)}
                       className={`w-10 h-10 rounded-[0.5rem] text-sm font-bold transition-all duration-200 ${currentPage === page
-                          ? 'bg-gold text-[#0a0a0a] shadow-[0_0_16px_rgba(201,150,10,0.4)]'
-                          : 'bg-[#161616] border border-white/10 text-white/60 hover:border-gold/30'
+                        ? 'bg-gold text-[#0a0a0a] shadow-[0_0_16px_rgba(201,150,10,0.4)]'
+                        : 'bg-[#161616] border border-white/10 text-white/60 hover:border-gold/30'
                         }`}
                     >
                       {page}
@@ -574,18 +574,30 @@ export default function App() {
             </div>
           </footer>
 
-          <motion.a
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            href="https://wa.me/5519999999999"
-            target="_blank"
-            rel="noreferrer"
-            className="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-[0_10px_30px_rgba(37,211,102,0.4)] z-50 border border-white/20"
-          >
-            <MessageCircle className="w-8 h-8 fill-current" />
-          </motion.a>
+          <div className="fixed bottom-8 right-8 z-50 flex items-center gap-4 group">
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-600 pointer-events-none bg-[#161616] border border-white/10 text-white px-4 py-2.5 rounded-[0.5rem] shadow-2xl text-sm font-semibold">
+              Fala com a gente! 👋
+            </div>
+
+            <motion.a
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              href="https://wa.me/5519999999999"
+              target="_blank"
+              rel="noreferrer"
+              className="relative w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-[0_0_30px_rgba(37,211,102,0.4)] border border-white/20"
+            >
+              <div className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-75"></div>
+
+              <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current relative z-10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+              </svg>
+
+              <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-[#FF3B30] rounded-full border-2 border-[#0a0a0a] z-20"></span>
+            </motion.a>
+          </div>
         </>
       )}
     </div>
