@@ -3,7 +3,7 @@
 
 @theme {
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  
+
   --color-gold: #C9960A;
   --color-gold-bright: #E5B539;
   --color-surface: #141313;
@@ -23,7 +23,7 @@
     background-size: 200% auto;
     transition: background-position 0.3s ease;
   }
-  
+
   .bg-gold-gradient:hover {
     background-position: right center;
   }
